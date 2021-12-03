@@ -12,10 +12,9 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   FirebaseServices _firebaseServices = FirebaseServices();
 
-  final CollectionReference _usersRef =
-      FirebaseFirestore.instance.collection("Users");
+  final CollectionReference _cardRef =
+      FirebaseFirestore.instance.collection("Card");
 
-  final User _user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,10 +37,7 @@ class _CartPageState extends State<CartPage> {
                           size: 26,
                         ),
                         StreamBuilder<QuerySnapshot>(
-                            stream: _usersRef
-                                .doc(_user.uid)
-                                .collection("Cart")
-                                .snapshots(),
+                            stream: _cardRef.snapshots(),
                             builder: (context, snapshot) {
                               int _totalItems = 0;
 

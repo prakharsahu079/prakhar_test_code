@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:prakhar_test/screens/CardPage.dart';
 
 class HomeProductCard extends StatefulWidget {
   final String productId;
@@ -24,20 +25,25 @@ class HomeProductCard extends StatefulWidget {
 
 class _HomeProductCardState extends State<HomeProductCard> {
   bool _registerFormLoading = false;
-  final CollectionReference _productsRef =
-      FirebaseFirestore.instance.collection('Products');
+  final CollectionReference _cardRef =
+      FirebaseFirestore.instance.collection('Cart');
   Future _addToCart() {
     setState(() {
       _registerFormLoading = false;
     });
+    /*final FirebaseAuth auth = FirebaseAuth.instance;
 
-    FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+    final User user = auth.currentUser;
+    final uid = user.uid;*/
 
-    return _productsRef
-        .doc(_firebaseAuth.currentUser.uid)
-        .collection("Cart")
+    return _cardRef
         .doc(widget.productId)
         .set({"size": "L"});
+
+
+    Navigator.push(context, MaterialPageRoute(
+      builder: (context) => CartPage(),
+    ),);
 
     setState(() {
       _registerFormLoading = true;

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:prakhar_test/screens/CardPage.dart';
 import 'package:prakhar_test/widgets/home_products_card.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -23,7 +24,12 @@ class HomeScreen extends StatelessWidget {
         actions: [
           Container(
             padding: EdgeInsets.only(right: 20),
-            child: Icon(Icons.shop, color: Colors.black),
+            child: InkWell(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => CartPage(),),);
+              },
+                child: Icon(Icons.shop, color: Colors.black),
+            ),
           ),
         ],
       ),
